@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'pe.andessur.sigo'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+application {
+    // Por defecto, "gradle run" levanta el servidor de la oficina central
+    mainClass = 'pe.andessur.sigo.servidor.ServidorCentral'
+}
+
+// Tareas para ejecutar el resto de programas: gradle runParte, runSensor, runBlockchain, runBully
+tasks.register('runParte', JavaExec) {
+    group = 'sigo'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'pe.andessur.sigo.cliente.ClienteParte'
+}
+tasks.register('runSensor', JavaExec) {
+    group = 'sigo'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'pe.andessur.sigo.cliente.SensorUDP'
+}
+tasks.register('runBlockchain', JavaExec) {
+    group = 'sigo'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'pe.andessur.sigo.blockchain.DemoBlockchain'
+}
+tasks.register('runBully', JavaExec) {
+    group = 'sigo'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'pe.andessur.sigo.algoritmo.BullyDemo'
+}
